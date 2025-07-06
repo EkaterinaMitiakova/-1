@@ -1,0 +1,19 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Playwright test output
+playwright-report/
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+# Environment variables
+.env
