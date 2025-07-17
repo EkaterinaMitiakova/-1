@@ -18,3 +18,6 @@ test('Переход к оформлению заказа', async ({ inventoryPa
   await cartPage.proceedToCheckout();
   await expect(cartPage.page.locator('.checkout_info')).toBeVisible();
 });
+
+
+//Ветка HW5
