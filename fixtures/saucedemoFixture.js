@@ -3,7 +3,6 @@ import { LoginPage } from '../pages/saucedemo/LoginPage.js';
 import { InventoryPage } from '../pages/saucedemo/InventoryPage.js';
 import { CartPage } from '../pages/saucedemo/CartPage.js';
 
-// Расширяем базовый test с нашими Page Object'ами
 export const test = base.extend({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
@@ -14,9 +13,9 @@ export const test = base.extend({
   cartPage: async ({ page }, use) => {
     await use(new CartPage(page));
   },
-  loggedInPage: async ({ page, loginPage }, use) => {
+  loginAsStandard: async ({ loginPage }, use) => {
     await loginPage.login('standard_user', 'secret_sauce');
-    await use(page); // возвращаем залогиненную страницу
+    await use();
   }
 });
 
