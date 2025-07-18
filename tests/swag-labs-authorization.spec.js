@@ -1,5 +1,4 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/LoginPage');
+import { test, expect } from '../Fixture/saucedemoFixture.js';
 
 const password = 'secret_sauce';
 
@@ -13,15 +12,12 @@ const users = [
 ];
 
 test.describe('Авторизация пользователей на сайте Swag Labs', () => {
-  let loginPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
+  test.beforeEach(async ({ loginPage }) => {
     await loginPage.goto();
   });
 
-  users.forEach(user => {
-    test(`Авторизация пользователя: ${user.name}`, async () => {
+  for (const user of users) {
+    test(`Авторизация пользователя: ${user.name}`, async ({ loginPage }) => {
       await loginPage.login(user.name, password);
 
       if (user.expectSuccess) {
@@ -30,7 +26,8 @@ test.describe('Авторизация пользователей на сайте
         await loginPage.checkLoginError();
       }
     });
-  });
+  }
 });
 
-// ветка HW4
+
+//5.2

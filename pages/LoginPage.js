@@ -1,6 +1,6 @@
-const { expect } = require('@playwright/test');
+import { expect } from '@playwright/test';
 
-class LoginPage {
+export class LoginPage {
   constructor(page) {
     this.page = page;
     this.usernameInput = page.locator('[data-test="username"]');
@@ -16,9 +16,15 @@ class LoginPage {
   }
 
   async login(username, password) {
+    await this.goto();
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
+  }
+
+  async loginAndWaitForInventory(username, password) {
+    await this.login(username, password);
+    await this.page.waitForURL('**/inventory.html');
   }
 
   async checkLoginSuccess() {
@@ -30,5 +36,3 @@ class LoginPage {
     await expect(this.errorMessage).toBeVisible();
   }
 }
-
-module.exports = { LoginPage };
